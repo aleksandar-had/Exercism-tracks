@@ -3,40 +3,66 @@
 // convenience to get you started writing code faster.
 //
 
-export const abilityModifier = () => {
-  throw new Error("Remove this statement and implement this function");
+export const abilityModifier = (ability) => {
+  if (ability < 3) {
+    throw new Error("Ability scores must be at least 3");
+  } else if (ability > 18) {
+    throw new Error("Ability scores can be at most 18");
+  }
+  return Math.floor((ability - 10) / 2);
 };
 
+// I chose to go with a simple for and not reduce since it might be faster :?
+// source: https://jsperf.com/reduce-vs-loop/4
 export class Character {
   static rollAbility() {
-    throw new Error("Remove this statement and implement this function");
+    let scores = [];
+    for (let i = 0; i < 4; i++) {
+      scores.push(Math.ceil(Math.random() * 6));
+    }
+    let highestScores = scores.sort((a, b) => a - b).slice(1, 4);
+    let rolls = 0;
+
+    for (let i = 0, l = highestScores.length; i < l; i++) {
+      rolls += highestScores[i];
+    }
+    return rolls;
+  }
+
+  constructor() {
+    this._strength = Character.rollAbility();
+    this._dexterity = Character.rollAbility();
+    this._constitution = Character.rollAbility();
+    this._intelligence = Character.rollAbility();
+    this._wisdom = Character.rollAbility();
+    this._charisma = Character.rollAbility();
   }
 
   get strength() {
-    throw new Error("Remove this statement and implement this function");
+    return this._strength;
   }
 
   get dexterity() {
-    throw new Error("Remove this statement and implement this function");
+    return this._dexterity;
   }
 
   get constitution() {
-    throw new Error("Remove this statement and implement this function");
+    return this._constitution;
   }
 
   get intelligence() {
-    throw new Error("Remove this statement and implement this function");
+    return this._intelligence;
   }
 
   get wisdom() {
-    throw new Error("Remove this statement and implement this function");
+    return this._wisdom;
   }
 
   get charisma() {
-    throw new Error("Remove this statement and implement this function");
+    return this._charisma;
   }
 
   get hitpoints() {
-    throw new Error("Remove this statement and implement this function");
+    return 10 + abilityModifier(this._constitution);
   }
 }
