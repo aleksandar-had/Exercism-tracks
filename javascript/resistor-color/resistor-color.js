@@ -4,11 +4,11 @@
 //
 
 export const colorCode = (color) => {
-  if (COLORS.indexOf(color) === -1) {
+  let colorIndex = COLORS.indexOf(color);
+  if (colorIndex === -1) {
     throw new Error("Invalid transisctor color");
-  } else {
-    return COLORS.indexOf(color);
   }
+  return colorIndex;
 };
 
 export const COLORS = [
