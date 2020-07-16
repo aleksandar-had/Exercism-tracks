@@ -8,47 +8,35 @@ export class Triangle {
     this.sides = [a, b, c];
   }
 
-  sideIsZeroNegative() {
-    return this.sides.some((side) => side <= 0);
+  passTriangleInequality() {
+    let [x, y, z] = this.sides.sort((a, b) => a - b);
+    return x + y >= z;
   }
-  sidesAreEqual() {
-    return new Set(this.sides).size === 1;
+
+  countEqualSides() {
+    if (new Set(this.sides).size === 1) {
+      return 3;
+    } else if (new Set(this.sides).size === 2) {
+      return 2;
+    }
+    return 0;
   }
-  twoSidesAreEqual() {
-    return new Set(this.sides).size === 2;
-  }
-  triangleIsViolating() {
-    let sortedSides = this.sides.sort((a, b) => a - b);
-    return sortedSides[0] + sortedSides[1] <= sortedSides[2];
+
+  triangleIsValid() {
+    return (
+      this.sides.every((side) => side > 0) && this.passTriangleInequality()
+    );
   }
 
   isEquilateral() {
-    if (this.sideIsZeroNegative() || this.triangleIsViolating()) {
-      return false;
-    } else if (this.sidesAreEqual()) {
-      return true;
-    }
-    return false;
+    return this.triangleIsValid() && this.countEqualSides() === 3;
   }
 
   isIsosceles() {
-    if (this.sideIsZeroNegative() || this.triangleIsViolating()) {
-      return false;
-    } else if (this.twoSidesAreEqual() || this.sidesAreEqual()) {
-      return true;
-    }
-    return false;
+    return this.triangleIsValid() && this.countEqualSides() >= 2;
   }
 
   isScalene() {
-    if (
-      this.sideIsZeroNegative() ||
-      this.triangleIsViolating() ||
-      this.twoSidesAreEqual() ||
-      this.sidesAreEqual()
-    ) {
-      return false;
-    }
-    return true;
+    return this.triangleIsValid() && this.countEqualSides() === 0;
   }
 }
