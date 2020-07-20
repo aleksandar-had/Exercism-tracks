@@ -16,8 +16,6 @@ const COLORS = [
 ];
 
 export const decodedValue = (colors) => {
-  let value = ""
-    .concat(COLORS.indexOf(colors[0]))
-    .concat(COLORS.indexOf(colors[1]));
+  let value = `${COLORS.indexOf(colors[0])}${COLORS.indexOf(colors[1])}`;
   return Number(value);
 };
