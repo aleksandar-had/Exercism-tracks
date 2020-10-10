@@ -1,2 +1,6 @@
 javascript/*/node_modules
 .vscode/*
+
+__pycache__
+.exercism
+.pytest_cache
