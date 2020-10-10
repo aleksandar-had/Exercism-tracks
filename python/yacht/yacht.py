@@ -28,7 +28,7 @@ FULL_HOUSE = lambda x: sum(x) if sorted(Counter(x).values()) == [2, 3] else 0
 FOUR_OF_A_KIND = lambda x: sum(d * 4 for d in set(x) if x.count(d) >= 4)
 LITTLE_STRAIGHT = lambda x: 30 if sorted(x) == [1, 2, 3, 4, 5] else 0
 BIG_STRAIGHT = lambda x: 30 if sorted(x) == [2, 3, 4, 5, 6] else 0
-CHOICE = sum
+CHOICE = lambda x: sum(x)
 
 
 def score(dice, category):
